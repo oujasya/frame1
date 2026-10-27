@@ -1,0 +1,25 @@
+:root{--motion-fast:150ms;--motion-normal:220ms;--motion-ease:cubic-bezier(.2,.7,.2,1)}
+button,.primary,.secondary{transition:background-color var(--motion-fast),border-color var(--motion-fast),color var(--motion-fast),box-shadow var(--motion-fast),filter var(--motion-fast),transform var(--motion-fast)}
+button:enabled:active,.primary:active,.secondary:active{transform:scale(.97)}
+.primary:hover,.secondary:hover{filter:brightness(1.1)}
+.movie-grid>article>.poster{transition:transform var(--motion-normal),box-shadow var(--motion-normal),filter var(--motion-normal)}
+.movie-grid>article:hover>.poster,.movie-grid>article:focus-within>.poster{transform:translateY(-5px);box-shadow:0 0 27px #ec7a484d;filter:brightness(1.05)}
+.poster-hover-hint,.save-button,.rail-arrow{transition:opacity var(--motion-normal),transform var(--motion-normal),background-color var(--motion-fast)}
+@media(hover:hover) and (pointer:fine){.movie-grid>article .save-button{opacity:0;transform:translateY(4px)}.movie-grid>article:hover .save-button,.movie-grid>article:focus-within .save-button,.movie-grid>article .save-button[aria-pressed=true]{opacity:1;transform:translateY(0)}}
+.save-button[aria-pressed=true]{color:#ee936c;background:#ee7b4820}.save-button .saved-check{display:inline-block;font-size:23px;line-height:1}
+.rail-viewport{scroll-behavior:smooth}.movie-page-backdrop{animation:frame-backdrop 380ms ease-out}.movie-page-intro>h1{animation:frame-enter 260ms both;animation-delay:60ms}.movie-page-intro>:is(.movie-facts,.movie-genres,.score-panels,.movie-synopsis){animation:frame-enter 260ms both;animation-delay:110ms}
+.poster.skeleton{background:linear-gradient(110deg,#252722 20%,#3a3d34 40%,#252722 60%);background-size:220% 100%;animation:frame-shimmer 1.7s linear infinite}
+.profile-tabs{position:relative;isolation:isolate}.profile-tabs:after{content:'';position:absolute;bottom:0;left:0;height:2px;width:var(--tab-width,0px);transform:translateX(var(--tab-left,0px));background:#ef8e68;transition:transform var(--motion-normal) var(--motion-ease),width var(--motion-normal) var(--motion-ease);pointer-events:none}.profile-tabs button[aria-current=page]{box-shadow:none}
+.profile-tab-content{animation:frame-enter 200ms ease-out}.star-filled{transition:width 120ms ease-out,filter 120ms}.star-choice:has(input:checked){animation:frame-star 220ms ease-out}.rating-star:has(input:checked) .star-filled{animation:frame-star 240ms ease-out;filter:drop-shadow(0 0 5px #ed8d5c55)}
+.wall-frame:enabled:hover{filter:brightness(1.12);box-shadow:0 18px 25px #000a,0 0 30px #ee934655}.profile-avatar-overlay{transition:opacity 180ms ease-out}.notice,.journal-feedback,.wall-feedback,.copy-profile-action [role=status],.profile-picture-control [role=status]{animation:frame-notice 200ms ease-out}.comment-thread{animation:frame-enter 200ms ease-out}.comment-thread[hidden]{display:none}
+dialog[open]{animation:frame-dialog 200ms ease-out}dialog::backdrop{animation:frame-backdrop 180ms ease-out}.stats-bar meter{transform-origin:left}.motion-notice-exit{animation:frame-exit 150ms ease-in forwards}
+@keyframes frame-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes frame-backdrop{from{opacity:0}to{opacity:1}}
+@keyframes frame-dialog{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@keyframes frame-star{50%{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes frame-notice{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes frame-exit{to{opacity:0;transform:translateY(-4px)}}
+@keyframes frame-shimmer{to{background-position:-220% 0}}
+@media(hover:none),(pointer:coarse){.movie-grid>article .save-button{opacity:1;transform:none}.poster-hover-hint{opacity:1}.rail-arrow{opacity:1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rail-viewport{scroll-behavior:auto}.movie-grid>article:hover>.poster,.movie-grid>article:focus-within>.poster,.wall-frame:enabled:hover,button:enabled:active{transform:none!important}}
+

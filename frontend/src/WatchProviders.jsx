@@ -1,0 +1,9 @@
+import React,{useEffect,useState} from 'react';
+import {countryName} from './CountrySelect';
+export default function WatchProviders({movie,user,api,demo}){
+ const [data,setData]=useState(null),[error,setError]=useState(''),[retry,setRetry]=useState(0);
+ useEffect(()=>{let active=true;setData(null);setError('');if(user?.country&&!demo)api(`/movies/${movie.id}/watch-providers`).then(r=>{if(active)setData(r)}).catch(e=>{if(active)setError(e.message)});return()=>{active=false}},[movie.id,user?.id,user?.country,retry,demo]);
+ const groups=[['flatrate','Subscription'],['free','Free'],['ads','Free with ads'],['rent','Rent'],['buy','Buy']];
+ const available=groups.some(([key])=>data?.[key]?.length);
+ return <section className="watch-providers"><h2>Where to watch{user?.country?` in ${countryName(user.country)}`:''}</h2>{!user?.country?<p className="muted">Sign in and choose your country in your profile to see local viewing options.</p>:demo?<p className="muted">Viewing options are unavailable in sample mode.</p>:<>{error&&<p role="alert">{error} <button className="secondary" onClick={()=>setRetry(v=>v+1)}>Retry</button></p>}{!data&&!error&&<p role="status">Checking viewing options…</p>}{data&&<>{!available&&<p className="muted">No viewing options are listed for this film in your country.</p>}{groups.map(([key,label])=>data[key]?.length>0&&<div className="provider-group" key={key}><h3>{label}</h3><ul>{data[key].map(p=><li key={p.provider_id}>{p.provider_name}</li>)}</ul></div>)}{data.link&&<a className="secondary" href={data.link} target="_blank" rel="noreferrer">See viewing options on TMDB ↗</a>}<p className="muted text-sm">Availability data by <a href="https://www.justwatch.com/" target="_blank" rel="noreferrer">JustWatch</a> via TMDB. Availability can change; check the provider before subscribing or paying.</p>{data._stale&&<p className="muted text-sm">Showing previously loaded availability while TMDB reconnects.</p>}</>}</>}</section>;
+}

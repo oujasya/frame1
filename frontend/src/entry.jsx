@@ -1,0 +1,16 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import '@fontsource/tektur/400.css';
+import '@fontsource/syne-mono/400.css';
+import '@fontsource/tektur/600.css';
+import '@fontsource/tektur/700.css';
+import App from './App';
+import {Motion} from './Motion.jsx';
+import {ErrorBoundary,ConnectivityNotice} from './AppRecovery';
+import './style.css';
+import './interface.css';
+import './typography.css';
+import './basics-complete.css';
+import './motion.css';
+import './layout.css';
+createRoot(document.getElementById('root')).render(<ErrorBoundary><ConnectivityNotice/><App/><Motion/></ErrorBoundary>);
